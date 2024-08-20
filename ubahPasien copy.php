@@ -1,0 +1,129 @@
+<?php
+include "function.php";
+
+// Cek sesi
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
+    if ($_SESSION['role'] == 2) {
+        header("location: indexRelasiDokter.php");
+    } else {
+        header("location:index.php");
+    }
+    exit;
+}
+
+$username = isset($_GET["id_user"]) ? mysqli_real_escape_string($koneksi, $_GET["id_user"]) : "";
+
+$queryUser = mysqli_query($koneksi, "SELECT * FROM user WHERE username = '$username'");
+$user = mysqli_fetch_assoc($queryUser);
+if (!$user) {
+    echo "Data pasien tidak ditemukan.";
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"/>
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:300,400,700&display=swap"
+        rel="stylesheet"/>
+</head>
+
+<body >
+    <div class="kiri">
+        <section class="logo">
+            <img src="gambar/logo sistem.png" alt="logo" height="150px" />
+        </section>
+        <div class="sidebar-heading">
+            <h5 class="font-weight-bold text-white text-uppercase teks">Data User</h5>
+        </div>
+        <section class="isi">
+            <a class="nav-link" href="indexAdmin.php">
+            <span>Data Pasien</span></a>
+        </section>
+        <section class="isi">
+            <a class="nav-link" href="indexRelasi.php">
+            <span>Relasi</span>
+            </a>
+        </section>
+        <div class="sidebar-heading">
+            <h5 class="font-weight-bold text-white text-uppercase teks">Gejala & Penyakit</h5> 
+        </div>
+        <section class="isi">
+            <a class="nav-link" href="indexPenyakit.php">
+            <span>Data Penyakit</span>
+            </a>
+        </section>
+        <section class="isi">
+            <a class="nav-link" href="indexGejala.php">
+            <span>Data Gejala</span>
+            </a>
+        </section>
+        <div class="sidebar-heading">
+            <h5 class="font-weight-bold text-white text-uppercase teks">Solusi</h5> 
+        </div>
+        <section class="isi">
+            <a class="nav-link" href="indexSolusi.php">
+            <span>Data Solusi</span>
+            </a>
+        </section>
+        <section class="isi">
+            <a class="nav-link" href="indexArtikel.php">
+            <span>Data Artikel</span>
+            </a>
+        </section>
+        <section class="isi">
+            <a class="nav-link" href="logout.php">
+            <span>Logout</span>
+            </a>
+        </section>
+    </div>
+
+    <div class="kanan">
+        <div class="container-fluid">
+
+        <!-- Page Heading -->
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Ubah Data Pasien</h1>
+            </div>
+
+        <!-- Content Row -->
+            <div class="row">
+
+                <form action="function.php?act=ubahPasien&id_user=<?= htmlspecialchars($user['username']); ?>" id="ubah" method="POST">
+                    <div class="form-group">
+                        <label for="nama">Nama Pasien</label>
+                        <input type="text" class="form-control" id="nama" name="nama" value="<?= htmlspecialchars($user['nama']); ?>" required>
+
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($user['email']); ?>" required>
+
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?= htmlspecialchars($user['alamat']); ?>" required>
+
+                        <label for="tgl_lahir">Tanggal Lahir</label>
+                        <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="<?= htmlspecialchars($user['tgl_lahir']); ?>" required>
+                    </div>
+                    
+                    <input type="submit" name="ubah_btn" id="ubah" class="btn btn-primary" value="Ubah">
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
