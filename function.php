@@ -240,7 +240,7 @@ function tambahGejalaDokter()
 {
     global $koneksi;
     $gejala = htmlspecialchars($_POST['namaGejala']);
-    $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
+    //$id_penyakit = htmlspecialchars($_POST['id_penyakit']);
     $queryGejala = "INSERT INTO gejala VALUES ('','$gejala')";
     
     $exe = mysqli_query($koneksi, $queryGejala);
@@ -257,7 +257,7 @@ function tambahGejala()
 {
     global $koneksi;
     $gejala = htmlspecialchars($_POST['namaGejala']);
-    $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
+    //$id_penyakit = htmlspecialchars($_POST['id_penyakit']);
     $queryGejala = "INSERT INTO gejala VALUES ('','$gejala')";
     
     $exe = mysqli_query($koneksi, $queryGejala);
