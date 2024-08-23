@@ -241,7 +241,7 @@ function tambahGejalaDokter()
     global $koneksi;
     $gejala = htmlspecialchars($_POST['namaGejala']);
     //$id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    $queryGejala = "INSERT INTO gejala VALUES ('','$gejala')";
+    $queryGejala = "INSERT INTO gejala (gejala) VALUES ('$gejala')";
     
     $exe = mysqli_query($koneksi, $queryGejala);
     
@@ -258,8 +258,8 @@ function tambahGejala()
     global $koneksi;
     $gejala = htmlspecialchars($_POST['namaGejala']);
     //$id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    $queryGejala = "INSERT INTO gejala VALUES ('','$gejala')";
-    
+    $queryGejala = "INSERT INTO gejala (gejala) VALUES ('$gejala')";
+
     $exe = mysqli_query($koneksi, $queryGejala);
     
     if (!$exe) {
@@ -274,7 +274,7 @@ function tambahPenyakitDokter()
 {
     global $koneksi;
     $penyakit = htmlspecialchars($_POST['namaPenyakit']);
-    $queryPenyakit = "INSERT INTO penyakit VALUES ('','$penyakit')";
+    $queryPenyakit = "INSERT INTO penyakit (penyakit) VALUES ('$penyakit')";
     $exe = mysqli_query($koneksi, $queryPenyakit);
     if (!$exe) {
         die('Error pada database');
@@ -288,7 +288,7 @@ function tambahPenyakit()
 {
     global $koneksi;
     $penyakit = htmlspecialchars($_POST['namaPenyakit']);
-    $queryPenyakit = "INSERT INTO penyakit VALUES ('','$penyakit')";
+    $queryPenyakit = "INSERT INTO penyakit (penyakit) VALUES ('$penyakit')";
     $exe = mysqli_query($koneksi, $queryPenyakit);
     if (!$exe) {
         die('Error pada database');
@@ -303,7 +303,7 @@ function tambahSolusiDokter()
     global $koneksi;
     $solusi = htmlspecialchars($_POST['namaSolusi']);
     $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    $querySolusi = "INSERT INTO solusi VALUES ('', '$id_penyakit', '$solusi')";
+    $querySolusi = "INSERT INTO solusi (id_penyakit, solusi_penyakit) VALUES ('$id_penyakit', '$solusi')";
     $exe = mysqli_query($koneksi, $querySolusi);
     if (!$exe) {
         die('Error pada database');
@@ -318,7 +318,7 @@ function tambahSolusi()
     global $koneksi;
     $solusi = htmlspecialchars($_POST['namaSolusi']);
     $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    $querySolusi = "INSERT INTO solusi VALUES ('', '$id_penyakit', '$solusi')";
+    $querySolusi = "INSERT INTO solusi (id_penyakit, solusi_penyakit) VALUES ('$id_penyakit', '$solusi')";
     $exe = mysqli_query($koneksi, $querySolusi);
     if (!$exe) {
         die('Error pada database');
