@@ -349,7 +349,7 @@ function tambahArtikel()
     global $koneksi;
     $artikel = htmlspecialchars($_POST['isi']);
     $id_artikel = htmlspecialchars($_POST['judul']);
-    $queryArtikel = "INSERT INTO artikel VALUES ('', '$id_artikel', '$artikel')";
+    $queryArtikel = "INSERT INTO artikel (judul, isi) VALUES ('$id_artikel', '$artikel')";
     $exe = mysqli_query($koneksi, $queryArtikel);
     if (!$exe) {
         die('Error pada database');
